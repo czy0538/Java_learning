@@ -43,6 +43,17 @@ public class Main
 //			System.out.println(i);
 //		}
 //		String name=new String("hell0 world");
+		int[] a=new int[10];
+		int j=0;
+		for (int i=0;i<a.length;i++)
+		{
+			a[i]=j;
+			j++;
+		}
+		for(var t:a)
+		{
+			System.out.println(t);
+		}
 
 	}
 }
