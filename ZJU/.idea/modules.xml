@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Clock/Clock.iml" filepath="$PROJECT_DIR$/Clock/Clock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SelectionSort/SelectionSort.iml" filepath="$PROJECT_DIR$/SelectionSort/SelectionSort.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/Shapes/Shapes.iml" filepath="$PROJECT_DIR$/src/Shapes/Shapes.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZJU.iml" filepath="$PROJECT_DIR$/ZJU.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notebook/notebook.iml" filepath="$PROJECT_DIR$/notebook/notebook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vendingmachine/vendingmachine.iml" filepath="$PROJECT_DIR$/vendingmachine/vendingmachine.iml" />
     </modules>
   </component>
 </project>
