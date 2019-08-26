@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 public class E9_10 {
   public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
+    var input = new Scanner(System.in);
     System.out.print("Enter a, b, c: ");
     QuadraticEquation quad = new QuadraticEquation(input.nextDouble(),
       input.nextDouble(), input.nextDouble());

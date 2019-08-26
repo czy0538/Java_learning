@@ -24,7 +24,7 @@ public class QuadraticEquation {
 
   // instance methods
   public double getDiscriminant() {
-    return (getB() * getB()) - (4 * getA() * getC());
+    return (Math.pow(b, 2)) - (4 * getA() * getC());
   }
 
   public double getRoot1() {
