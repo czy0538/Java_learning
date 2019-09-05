@@ -19,7 +19,7 @@ public class App {
             int result = quotient(num1,num2);
             System.out.println(result);
         } catch (ArithmeticException ex) {
-            //TODO: handle exception
+            
             System.out.println("hehe");
         }
 
