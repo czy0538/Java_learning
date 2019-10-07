@@ -16,6 +16,7 @@
 
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class One {
@@ -47,7 +48,9 @@ public class One {
             StdOut.print("\n");
         }
     }
+
     public static void main(String[] args) {
+        var hehe=new ArrayList<Integer>()
         System.out.println("请输入杨辉三角的行数");
         Scanner sca=new Scanner(System.in);
         int n=sca.nextInt();
