@@ -82,14 +82,21 @@ public class CalculatorFrame extends JFrame
             add(b_sub);
             add(b_sum);
 
-            b1.addActionListener(event -> calculator(1, true,0)
-            );
-            b2.addActionListener(event -> calculator(2, true,0)
-            );
-            b_sum.addActionListener((event) ->calculator(0,false,0));
-
-            b_add.addActionListener((evevt) -> calculator(0, false,1));
-            b_sub.addActionListener(event->calculator(0,false,2));
+            b1.addActionListener(event -> calculator(1, true, 0));
+            b2.addActionListener(event -> calculator(2, true, 0));
+            b3.addActionListener(event -> calculator(3, true, 0));
+            b4.addActionListener(event -> calculator(4, true, 0));
+            b5.addActionListener(event -> calculator(5, true, 0));
+            b6.addActionListener(event -> calculator(6, true, 0));
+            b7.addActionListener(event -> calculator(7, true, 0));
+            b8.addActionListener(event -> calculator(8, true, 0));
+            b9.addActionListener(event -> calculator(9, true, 0));
+            b0.addActionListener(event -> calculator(0, true, 0));
+            b_division.addActionListener(event -> calculator(0, false, 4));
+            b_sum.addActionListener((event) -> calculator(0, false, 0));
+            b_add.addActionListener((event) -> calculator(0, false, 1));
+            b_sub.addActionListener(event -> calculator(0, false, 2));
+            b_mult.addActionListener((event -> calculator(0, false, 3)));
 
         }
 
@@ -108,28 +115,25 @@ public class CalculatorFrame extends JFrame
         else
         {
             symbol.add(s);
+            int n = data.size();
             double sum = 0;
-            int n=data.size();
-            StdOut.println("n:"+n);
-            for (int i = 0; i <n; i++)
+            for (int i = 0; i < n; i++)
             {
-                StdOut.println("i"+i);
                 sum += (data.pop() * Math.pow(10, i));
 
             }
-            StdOut.println(sum);
             answer.add(sum);
 
 
             if (answer.size() == 2)
             {
                 double ans = 0;
-                int temp=symbol.get(0);
+                int temp = symbol.get(0);
                 symbol.remove(0);
                 switch (temp)
                 {
                     case 0:
-                        ans = answer.get(0) ;
+                        ans = answer.get(0);
                         calculatorPanel.display.setText(String.valueOf(ans));
                         break;
                     case 1:
@@ -143,9 +147,31 @@ public class CalculatorFrame extends JFrame
                         answer.clear();
                         answer.add(ans);
                         calculatorPanel.display.setText(String.valueOf(ans));
+                        break;
+                    case 3:
+                        ans = answer.get(0) * answer.get(1);
+                        answer.clear();
+                        answer.add(ans);
+                        calculatorPanel.display.setText(String.valueOf(ans));
+                        break;
+                    case 4:
+                        if (answer.get(1) == 0)
+                        {
+                            calculatorPanel.display.setText("被除数不能为0");
+                            answer.remove(1);
+                        }
+                        else
+                        {
+                            ans = answer.get(0) / answer.get(1);
+                            ans = ans = answer.get(0);
+                            answer.clear();
+                            answer.add(ans);
+                            calculatorPanel.display.setText(String.valueOf(ans));
+                        }
+
+                        break;
                 }
             }
-
 
 
         }
@@ -158,9 +184,8 @@ public class CalculatorFrame extends JFrame
 
         public CalculatorPanel()
         {
-            display = new JLabel("欢迎使用计算器!", JLabel.LEFT);
+            display = new JLabel("欢迎使用计算器!", JLabel.CENTER);
             add(display);
-
         }
     }
 
