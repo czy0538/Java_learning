@@ -10,7 +10,6 @@ public class CalculatorFrame extends JFrame
 {
     private Stack<Double> data = new Stack<Double>();
     private ArrayList<Double> answer = new ArrayList<Double>();
-    private ButtonPanel buttonPanel;
     private CalculatorPanel calculatorPanel;
     private ArrayList<Integer> symbol;
 
@@ -28,7 +27,7 @@ public class CalculatorFrame extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        buttonPanel = new ButtonPanel();
+        ButtonPanel buttonPanel = new ButtonPanel();
         calculatorPanel = new CalculatorPanel();
 //        add(calculatorPanel, BorderLayout.NORTH);
 //        add(buttonPanel, BorderLayout.SOUTH);
