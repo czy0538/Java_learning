@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SyncCounter2",
+            "request": "launch",
+            "mainClass": "SyncCounter2"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestThreadDaemon",
+            "request": "launch",
+            "mainClass": "TestThreadDaemon"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestThread1",
+            "request": "launch",
+            "mainClass": "TestThread1"
+        }
+    ]
+}
