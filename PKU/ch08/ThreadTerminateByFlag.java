@@ -17,6 +17,8 @@ public class ThreadTerminateByFlag {
 
 class Timer implements Runnable {
 	boolean flg = true;
+	public Timer(String string) {
+	}
 	public void run() {
 		while(flg){
 			System.out.print( "\r\t" + new Date() + "..." );
@@ -28,5 +30,7 @@ class Timer implements Runnable {
 	}
 	public void stopRun(){
 		flg = false;
+	}
+	public void schedule(TimerTask task, int i, int j) {
 	}
 }
