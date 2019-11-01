@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52ab6525-db3d-4dc7-9ad7-be97e56058c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../网络编程/src/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../网络编程/src/UseURL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../聊天/src/Client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../聊天/src/Client/UI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../聊天/src/Server/ChatServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../聊天/src/Server/ChatTools.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../聊天/src/Server/DaoTools.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../聊天/src/Server/ServerThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../聊天/src/Server/UserInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../PKU/ch08/ThreadTerminateByFlag.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../PKU/ch08/ThreadTerminateByFlag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../笔记.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java程序设计.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java程序设计.xmind" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../聊天/src/Client/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../聊天/src/Client/UI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +50,7 @@
       <workItem from="1572248024103" duration="1000" />
       <workItem from="1572274678327" duration="140000" />
       <workItem from="1572423068364" duration="83000" />
+      <workItem from="1572609666020" duration="148000" />
     </task>
     <servers />
   </component>

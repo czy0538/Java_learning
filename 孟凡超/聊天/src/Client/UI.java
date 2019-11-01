@@ -69,7 +69,7 @@ class LoginFrame extends JFrame
         jl2 = new JLabel("密  码：");
 
         jb1.addActionListener((event) -> {
-             name = jtf.getText();
+        name = jtf.getText();
             name = name.concat("\r\n");
             char[] pw = jpwd.getPassword();
             password = new String(pw);
