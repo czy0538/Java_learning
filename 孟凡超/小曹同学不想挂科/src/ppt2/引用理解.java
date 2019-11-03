@@ -14,6 +14,10 @@ public class 引用理解
         t2.print();
         t1.a=233;
         t2.print();
+
+        int a=24,b=13;
+        StdOut.println(a&b);
+
     }
 }
 
