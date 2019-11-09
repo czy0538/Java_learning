@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestD",
+            "request": "launch",
+            "mainClass": "PPT5.TestD"
+        }
+    ]
+}

@@ -1,3 +1,5 @@
+
+
 ## 0 易混总结
 
 ### 1static和final
@@ -353,4 +355,349 @@ public static int getRandomInt(int min, int max) {
 
 ### 4 数组、枚举、字符串、容器
 
-​	
+	#### 4.1 数组
+
+- Java将数组作为对象来处理
+
+##### 4.1.1 一维数组的定义
+
+```java
+type arrayName[];
+Type[] arrayName;
+```
+
+- 定义并不会为数组元素分配内存，因此[] 中不需要指出数组长度。
+- 这只是个引用，并不会真正分配内存空间。
+
+##### 4.1.2 一维数组的创建
+
+非为静态初始化和动态初始化
+
+- 静态初始化：定义数组的同时对数组元素进行初始化。
+- 动态初始化：使用运算符new为数组分配空间，数组说明的方括号中的数字表示数组元素个数。
+
+```java
+String[] names=new String[3];
+names[0]=“Zhang”; 
+names[1]=“Li”;
+names[2]=“Wang”;
+//等价于
+String names[]={“Zhang”, “Li”, “Wang” };
+
+```
+
+##### 4.1.3复合类型数组
+
+复合类型数组使用运算符new为只是为数组本身分配空间，并没有对数组的元素进行初始化。对于复合类型的数组，需要经过两步进行空间分配：
+
+```java
+	type arrayName[]=new type[arraySize];//创建数组本身
+
+	arrayName[0]=new type(paramList);
+    arrayName[1]=new type(paramList);
+    ……
+    arrayName[arraySize-1]=new type(paramList); //创建各个数组元素
+```
+
+##### 4.1.4 数组比较
+
+数组属于引用型变量，因此两个相同类型的数组如果具有**相同的引用**，它们就有完全相同的元素。
+
+即引用相等表示他们指向同一个数组。
+
+##### 4.1.5 数组的遍历
+
+- 循环遍历
+
+- toString()方法遍历
+
+  ```java
+  Arrays.toString(arrayName);
+  ```
+
+##### 4.1.6 多维数组
+
+```java
+//定义
+int intarray [][];
+int	[][] intarray;
+
+//动态初始化
+//方法1：直接为每一维分配空间
+int[][] intArray=new type[arraylength1][arraylength2];
+//方法2：多维数组可以从高维起，分别为每一维分配内存。
+type arrayN[][]=new type[arraylength1][];
+arrayN[0]=new type[arraylength2];
+arrayN[1]=new type[arraylength2];
+…
+arrayN[arraylenth1-1]=new type[arraylength2];
+//即除了最后一维可以不给定长度，其他必须给定长度，且可以生成不同长度的低维数组
+```
+
+##### 4.1.7 数组复制
+
+System
+
+```java
+public static void arraycopy(sourceArray, //源数组
+                             int index1, //起始位置
+                             copyArray, //目标数组
+                             int index2,//目标数组起始位置
+                             int length)//长度
+    //如果放不下报异常
+```
+
+```java
+Arrays类
+public static type[] copyOf(type[] original, int newLength)
+//生成一个内容为orginal，长度为newLength的新数组
+```
+
+```java
+public static type[] copyOfRange(type[] original, int from, int to)
+//将参数original指定的数组中从索引from至to-1的元素复制到一个新数组中，并返回这个新数组
+```
+
+
+
+#### 4.2 枚举
+
+```java
+enum 枚举名
+{
+      常量列表
+}
+```
+
+![image-20191103145701694](D:\A personal date\GitHub\Java_learning\image-20191103145701694.png)
+
+#### 4.3 字符串
+
+- String为不变字符串，StringBuffer为可变字符串
+- 常用方法：
+  - length()：返回字符串中的字符个数。
+  - charAt(int index)：返回字符串中index位置的字符。
+  - toLowerCase()：将当前字符串中的所有字符转换为小写形式。
+  - toUpperCase()：将当前字符串中的所有字符转换为大写形式。
+  - subString(int beginIndex)：截取当前字符串中从beginIndex开始到末尾的子串。
+  - subString(int beginIndex, int endIndex)：截取当前字符串中从beginIndex开始到endIndex结尾的子串。
+  - replace(char oldChar, char newChar)：将当前字符串中出现的所有oldChar转换为newChar。
+
+#### 4.4 容器
+
+- Collection接口：存放独立元素的序列。
+- Map接口：存放key-value型的元素对。
+- 四个常用的容器：
+  - LinkedList：其数据结构采用的是链表，此种结构的优势是删除和添加的效率很高，但随机访问元素时效率较ArrayList类低。
+  - ArrayList：其数据结构采用的是线性表，此种结构的优势是访问和查询十分方便，但添加和删除的时候效率很低。
+  - HashSet：不允许其中存在重复的元素，无法添加一个重复的元素，利用Hash函数进行了查询效率上的优化。
+  - HashMap：提供了key-value的键值对数据存储机制，可以十分方便的通过键值查找相应的元素，而且通过Hash散列机制，查找十分方便。
+
+#### 4.4.1 迭代器
+
+- boolean hasnext(); //检查序列中是否还有元素
+- Object next(); //获得序列中的下一个元素
+- void remove(); //将迭代器中当前元素删除
+
+
+
+## 5 对象和类进阶
+
+### 5.1 抽象数据类型
+
+- 是指基于一个逻辑类型的数据类型以及这个个类型上的一组操作。
+- Java只“按值”传送自变量，即方法调用不会改变自变量的值。
+- 重载方法名：Java允许对多个方法使用同一个方法名，这就是方法名的重载。方法重载允许Java在同一个类中定义相同的方法名，但需要具有不同的参数表（参数个数或者参数名不同）。
+
+### 5.2 对象的构造和初始化
+
+- 构造方法：
+  - 构造方法的名字与类名相同。
+  - 没有返回类型。
+  - 通常要说明为public类型，即公有的。
+  - 可以按需要包含所需的参数列表。
+  - **构造方法不能继承。**
+
+###  5.3 this引用
+
+- this引用对象自身，常用在引用隐藏数据域，调用构造方法。
+- static方法中不能出现this
+
+### 5.4 子类
+
+- **“is a”关系**
+
+- extends关键字，object类为所有类的父类
+
+- 继承父类的属性在子类中不用定义，可以直接使用。
+
+- Java只允许单继承
+
+- 多态性：同一名字的若干个方法，有不同的实现(放方法体中的代码不一样)。通过重载或者重写实现（final 方法不能被重载或者重写）
+
+- **动态绑定：**假设对象o是类C1,C2,…,Cn-1和Cn的实例，其中，C1是C2的子类，C2是C3的子类，…，Cn-1是Cn的子类，如果对象o调用一个方法m，Java虚拟机依次在类C1,C2,…,Cn-1,Cn中查找方法m的实现，直到找到为止。**即从子类逐个向父类寻找，调用找到的第一个**
+
+- 异类集合：异类集合是由不同质内容组成的集合，也就是说，集合内所含元素的类型可以不完全一致。
+
+  ```java
+  A[] abcdef=new A[7];//设置类型时必须为父类的
+  //此时只是一个数组，里面7个A引用，值为null
+  abcdef[0]=new A();
+  abcdef[1]=new B();
+  abcdef[2]=new C();
+  abcdef[3]=new D();
+  abcdef[4]=new E();
+  for(int i=0;i<5;i++)
+  	{        
+  		abcdef[i].printf();
+  	}
+  
+  ```
+
+- 由于类的多态性，类的变量既可以指向本类实例，又可以指向其子类的实例。在程序中，有时需要判明某个引用到底指向哪个实例，这可以通过**instanceof**运算符来实现。
+
+  ```java
+  class A
+  {
+      void printf()
+      {
+          StdOut.println("A");
+      }
+      void printf(A e)
+      {
+          if (e instanceof B)
+          {
+              StdOut.println(e.getClass()+"is b");
+          }
+          else if(e instanceof C)
+          {
+              StdOut.println(e.getClass()+"is c");
+          }
+  
+      }
+  
+  }
+  
+  //main函数
+  A a=new A();
+  a.printf(b);
+  a.printf(c);
+  ```
+
+  即父类中的一个方法接受他的不同的子类的成员，然后判断到底是哪个子类的
+
+- 转换对象：Java允许使用对象之父类类型的一个变量指示该对象，称为转换对象，但不允许子类指向父类。
+
+### 5.5 方法重写
+
+- 子类重写父类方法的情况：
+
+  - 子类要做与父类不同的事情；
+  - 在子类中取消这个方法；
+  - 子类要做比父类更多的事情。
+
+- 如果子类已经重写了父类中的方法，但在子类中还想使用父类中被隐藏的方法，可以使用super关键字。
+
+- 方法重写的规则
+
+  - 重写方法的允许访问范围不能小于原方法。
+  - 重写方法所抛出的异常不能比原方法更多
+
+- **父类构造方法调用**  
+
+  - Java要求一个父类的对象要在子类运行前完全初始化。
+
+  - super关键字也可以用在构造方法中，其功能为调用父类的构造方法。
+
+  - **如果在子类的构造方法的定义中没有明确调用父类的构造方法，则系统在执行子类的构造方法时会自动调用父类的构造方法(无参数的构造方法)。**
+
+  - **如果在子类的构造方法的定义中调用了父类的构造方法，则调用语句必须出现在子类构造方法的第一行。**
+
+    ```java
+    public class TestD
+    {
+        public static void main(String[] args)
+        {
+            method(new B());
+            method(new A());
+        }
+    
+        public static void method(A a)//只是生成引用，跟调用谁的函数和构造函数无关
+        {
+            a.print();
+        }
+    }
+    
+    class A
+    {
+        int data;
+    
+        public A()
+        {
+            add(2);
+        }
+    
+        public A(int k)
+        {
+            add(k);
+        }
+    
+        public void add(int i)
+        {
+            data += i;
+        }
+    
+        public void print()
+        {
+            System.out.println("data=" + data);
+        }
+    }
+    
+    class B extends A
+    {
+        public B()
+        { 
+            //super(1);
+            add(1);
+    
+        }
+    
+        public void add(int i)
+        {
+            data += i * 3;
+        }
+    }
+    ```
+
+    method(new B())详解：
+
+    B()继承A，故先隐式调用A的无参构造函数，执行add(1)，此时执行的是重写的add（1），故data=2*3=3；然后再执行add（1），结果为9，若加上super（9），则调用有参构造函数。
+
+    method(new A())详解：
+
+    直接调用A的构造函数和add函数。
+
+    **即：**new的是谁就调用谁的方法，即使是在子类中调用父类的构造函数也是调用重写的方法（动态绑定）
+
+  
+
+### 5.6 Java包
+
+- 一个Java源代码文件称为一个编译单元。
+- Java语言规定，一个编译单元中只能有一个public类，且该类名与文件名相同。
+- 编译单元中的其它类是该public类的支撑类。
+- 经过编译，编译单元中的每个类都产生一个.class文件。
+- Java的工作程序是一系列的.class文件，Java解释器负责寻找、加载和解释这些文件。
+- 包是类的容器，包的设计人员利用包来划分名字空间，用于分隔类名空间，以避免类名冲突。
+- 
+
+### 5.7 类成员
+
+### 5.8 关键字final
+
+### 5.9 抽象类
+
+### 5.10 接口
+
+### 5.11 内部类
+
