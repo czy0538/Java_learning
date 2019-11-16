@@ -1,6 +1,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 0 易混总结
 
 ### 1static和final
@@ -1177,6 +1195,8 @@ g1.add(f);
 ```java
 //创建一个文本框，其初始内容由参数text指定，首选宽度由参数columns指定，如果参数columns被设置为0，则首选宽度将是组件实现的自然结果。
 JTextField(String text, int columns);
+String s=getText();
+setText(" ");
 ```
 
 ### 7.9 菜单组件
@@ -1400,3 +1420,407 @@ class MyFrame extends JFrame
   ```
 
   
+
+## 8 数据流
+
+### 8.1 数据流的基本概念
+
+#### 8.1.1 Java的输入、输出机制
+
+- 输入、输出操作
+  - 输入操作：计算机（**CPU和存储**）从其他设备中读取数据的操作称为输入操作。
+  - 输出操作：计算机向其他设备写出数据的操作称为输出操作。
+- 计算机、其他设备
+  - 计算机：**计算机指的是CPU和存储的组合；**
+  - 其他设备：其他设备有键盘、鼠标、显示器、打印机、磁盘、网络等。
+
+#### 8.1.2 Java数据流传输模式
+
+- 流模式
+  Java为了解决数据传输问题，在传输形式上采用**无结构的字节、字符或相同单位的数据序列**，按照**顺序“数据流”**的方式通过某传输媒介实现数据交换。
+- 输入流、输出流
+  数据流的走向是有方向的—流向，数据流向的确定是相对计算机而言的。**传向计算机的数据流称为输入流，计算机发出的数据流称为输出流。**
+- 字节流与字符流
+  - 字节流(8位)：针对字节(或ASCII编码的字符)数据流进行传输。
+  - 字符流(16位)：针对Unicode编码的字符数据流进行传输。
+
+#### 8.2 基本字节数据流
+
+- InputStream（抽象类）
+- OutputStream（抽象类）
+
+##### 8.2.1 标准输入输出流
+
+- 标准输入输出是在命令行方式下的输入输出方式。
+- System.in
+  System.in是InputStream类型变量，对应于标准输入，主要通过read方法接受键盘输入数据。
+- System.out
+  System.out是PrintStream类型变量，对应于标准输出，主要通过print和println方法向控制台输出数据。
+- System.err
+  System.err是PrintStream类型变量，用于向控制台输出错误信息。
+
+```java
+package PPT10;
+
+import edu.princeton.cs.algs4.StdOut;
+
+import java.io.*;
+
+public class StandardStream
+{
+    public static void echoIN()//输入重定向到文件
+    {
+        try//异常处理不可少
+        {
+            var in = new FileInputStream("setOut.txt");
+            System.setIn(in);
+            while (true)
+            {
+                int i = System.in.read();
+                //注意转换
+                char c = (char) i;
+                if (i == -1)
+                {
+
+                    break;
+                }
+                System.out.print(c);
+
+
+            }
+            in.close();
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void echoOut(String s)
+    {
+        char[] chs = s.toCharArray();
+
+        try
+        {
+            var out = new PrintStream("setOut.txt");
+            System.setOut(out);
+            for (char ch : chs)
+            {
+                System.out.write(ch);//输出重定向到文件
+            }
+            // System.out.write(-1);
+            out.close();
+
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        echoIN();
+        echoOut("test heheda");
+    }
+}
+
+```
+
+##### 8.2.2 文件数据流
+
+- FileInputStream：用来打开一个输入文件。对于类FileInputStream的实例对象，如果所指定的文件不存在，产生FileNotFoundException异常。
+- FileOutputStream：用来打开一个输出文件。对于类FileOutputStream的实例对象，如果所指定的文件不存在，则创建一个新文件。
+
+```java
+package PPT10;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class FilrStream
+{
+    public static void main(String[] args)
+    {
+        String filename;
+        Scanner input = new Scanner(System.in);
+        filename = input.nextLine();
+        try
+        {
+            FileInputStream in = new FileInputStream(filename);
+            
+            StringBuffer s = new StringBuffer();
+            FileOutputStream out = new FileOutputStream(filename + ".c");
+            
+            //Scanner方法读取
+            Scanner fileInput=new Scanner(in);
+            while(fileInput.hasNextLine())
+            {
+                s.append(fileInput.nextLine());
+            }
+
+            //read方法读取
+            while (true)
+            {
+                int i = in.read();
+                if (i == -1)
+                {
+                    break;
+                }
+                s.append((char) i);
+            }
+            System.out.println(s);
+			//转为byte数组
+            byte b[] = s.toString().getBytes();
+            //写法1
+            for (var i : b)
+            {
+                out.write(i);
+            }
+            //写法2
+            out.write(b, 0, b.length);
+
+            in.close();
+            out.close();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+}
+
+```
+
+##### 8.2.3 （过滤器）缓冲区数据流
+
+- 增加缓冲区流，减少访问硬盘的次数，提高效率！
+- 包括BufferedInputStream和BufferedOutputStream，它们都是过滤器数据流，都是在数据流上增加了一个缓冲区。
+- 当读写数据时，数据以块为单位先进入缓冲区(块的大小可以进行设置)，其后的读写操作则作用于缓冲区。
+- 只有缓冲区满时，才会将数据送到输出流。一般在关闭一个缓冲区输出流之前，应使用**flush()**方法，强制输出剩余数据，以确保缓冲区内的所有数据全部写入输出流。
+- 提供了对mark()、reset()、skip()等方法的支持。
+
+```java
+package PPT10;
+
+import java.io.*;
+
+public class BufferFIleStream
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            var in=new FileInputStream("setOut.txt");
+            var out=new FileOutputStream("setOut.txt.c");
+            //创建缓冲区数据流并设置缓冲区大小，也可以不设置
+            var bin=new BufferedInputStream(in,2);
+            var bout=new BufferedOutputStream(out,233);
+            while(true)
+            {
+                //文件转移大法
+                int i = bin.read();
+                if (i == -1)
+                {
+                    break;
+                }
+                bout.write(i);
+            }
+            //最后一定强制刷新
+            bout.flush();
+            in.close();
+            bin.close();
+            bout.close();
+            out.close();
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+}
+```
+
+##### 8.2.3 数据数据流
+
+- 文件流和缓冲区流的处理对象是**字节或字节数组**，利用数据输入输出流可以实现对文件的不同数据类型的读写。
+- DataInputStream和DataOutputStream：一种较为高级的数据输入输出方式，除了字节和字节数组，还可以处理int、float、boolean等类型。还可以用readLine方法读取一行信息。
+
+```java
+package PPT10;
+
+import edu.princeton.cs.algs4.StdOut;
+
+import java.io.*;
+
+public class DataStream
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            //创建
+            var in=new FileInputStream("setOut.txt");
+            var out=new FileOutputStream("setOut.txt");
+            var din=new DataInputStream(in);
+            var dout=new DataOutputStream(out);
+			//输出
+            dout.writeUTF("testUTF");
+            dout.writeInt(23);
+            dout.writeDouble(233.3);
+			//读入
+            String c=din.readUTF();
+            int a=din.readInt();
+            double b=din.readDouble();
+            StdOut.println(a);
+            StdOut.println(b);
+            StdOut.println(c);
+
+            in.close();
+            din.close();
+            out.close();
+            dout.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+##### 8.2.4 管道数据流
+
+- 管道数据流主要用于线程间的通信。
+- 一个线程中的PipedInputStream对象从另一个线程中互补的PipedOutputStream对象中接收输入 。
+  类PipedInputStream必须和类PipedOutputStream一起使用，来建立一个通信通道。
+- 管道数据流必须同时具备可用的输入端和输出端。
+
+![image-20191116163742567](D:\A personal date\GitHub\Java_learning\image-20191116163742567.png)
+
+##### 8.2.5 对象流
+
+- 能够输入输出对象的流称为对象流。
+- 通过ObjectInputStream和两个类实现对象流。ObjectOutputStream
+
+```java
+//将一个Customer对象写入文件
+Customer c=new Customer();
+FileOutputStream f=new FileOutputStream(“D:/java/f.txt”);
+ObjectOutputStream s=new ObjectOutputStream(f);
+try{
+     s.writeObject(c);
+     s.close()
+}catch(IOException e){
+     e.printStackTrace();
+}
+
+//从文件中取出一个Customer对象实例
+Customer c=null;
+FileInputStream f=new FileInputStream(“D:/java/f.txt”);
+ObjectInputStream s=new ObjectInputStream(f);
+try{
+     c=(Customer)s.readObject(c);
+     c.close()
+}catch(IOException e){
+     e.printStackTrace();
+}
+```
+
+##### 8.2.6 可持续性
+
+- 持续性：记录自己的状态以便将来再生的能力，叫做对象持续性。
+- 持续化：对象通过写出描述自己状态的数值来记录自己的过程叫做持续化(或串行化)。
+- Serializable接口：当一个对象声明实现Serializable接口时，表明该类加入了对象串行化协议。
+- 对象输出/输入流：要串行化一个对象，必须与特定的对象输出输入流联系起来，通过对象输出流将对象状态保存下来，之后再通过对象输入流将对象状态恢复，这一功能是通过ObjectOutputStream和ObjectInputStream两个类实现的。
+- 串行化只能保存对象的**非静态成员变量**，而**不能保存任何成员方法和静态成员变量**，而且保存的只是变量的值，对于变量任何修饰都不能保存。
+- 对于不可持续化的成员变量，用关键字**transient**标记。
+- 当数据变量是一个对象时，该对象的数据成员也可以被持续化。对象的数据结构或结构树，包括其子树在内，构成了这个对象的结构表。
+- 其他方法同8.2.5
+
+
+
+#### 8.3 基本字符流
+
+##### 8.3.1 Reader和Writer
+
+- **区别在于之前的方法读入的是byte，现在改成char**
+
+- 用于读取或者写入字符流的抽象类是Reader和Writer，它们支持的方法类似于字节流InputStream和OutputStream中的方法。
+- InputStream中的方法read返回由某个int值的低8位构成的byte，而Reader中的方法read**返回由某个int值的低16位构成的char**。
+- OutputStream具有可以写入byte数组的方法，Writer具有可以**写入char数组**的方法。
+
+```java
+package PPT10;
+import java.io.*;
+public class ReaderAndWriterDemo
+{
+    public static void main(String[] args) throws IOException
+    {
+        FileOutputStream fos = new FileOutputStream("my.txt");
+        //创建Writer
+        OutputStreamWriter osw = new OutputStreamWriter(fos, "utf-8");
+        osw.write("哈尔滨工业大学");
+        osw.close();
+        //创建Reader
+        FileInputStream fis = new FileInputStream("my.txt");
+        InputStreamReader isr = new InputStreamReader(fis, "utf-8");
+        int c = 0;
+        while ((c = isr.read()) != -1)
+        {
+            System.out.print((char) c);
+        }
+        isr.close();
+    }
+}
+
+```
+
+##### 8.3.2 缓冲区读写
+
+```java
+整行处理方法：
+public String readLine()
+//BufferedReader的方法，从输入流中读取一行字符，行结束标志为‘\n’、‘\r’或两者一起。
+public void newLine()
+//BufferedWriter的方法，向输出流中写入一个行结束标志。
+```
+
+
+
+![image-20191116170055839](D:\A personal date\GitHub\Java_learning\image-20191116170055839.png)
+
+![image-20191116170117532](D:\A personal date\GitHub\Java_learning\image-20191116170117532.png)
+
+#### 8.4 文件处理
+
+##### 8.4.1 文件类File
+
+```java
+File类构造方法：
+public File(String 路径名)
+public File(File parent, String child)
+public File(String 文件路径, String 文件名)
+
+```
+
+##### 8.4.2 随机访问文件
+
+- 在文件的任意位置读或写数据，可以同时进行读和写的操作。RandomAccessFile提供了对文件随机读写操作。
+
+```java
+RandomAccessFile  myRAFile;
+myRAFile=new RandomAccessFile(“file1.txt”, “r”); 
+
+File myFile= new File("mymotd");
+RandomAccessFile  myRAFile;
+myRAFile=new RandomAccessFile(myFile，” rw”); 
+
+```
+

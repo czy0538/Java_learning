@@ -60,6 +60,7 @@ class MyFrame extends JFrame
             JFileChooser jf=new JFileChooser();
             jf.add(new JLabel("open"));
             jf.setSize(200,200);
+            JTextField jt=new JTextField();
 
             add(b1);
             add(b2);
