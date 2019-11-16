@@ -44,7 +44,7 @@ public class CalculatorFrame extends JFrame
 
     private class ButtonPanel extends JPanel
     {
-        private JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, b_add, b_sub, b_mult, b_division, b_sum, b_sin,b_cos,b_tan;
+        private JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, b_add, b_sub, b_mult, b_division, b_sum, b_sin, b_cos, b_tan;
 
         public ButtonPanel()
         {
@@ -67,8 +67,8 @@ public class CalculatorFrame extends JFrame
             b_sub = new JButton("-");
             b_sum = new JButton("=");
             b_sin = new JButton("sin");
-            b_cos=new JButton(("cos"));
-            b_tan=new JButton("tan");
+            b_cos = new JButton(("cos"));
+            b_tan = new JButton("tan");
 
             add(b0);
             add(b1);
@@ -102,7 +102,7 @@ public class CalculatorFrame extends JFrame
             b0.addActionListener(event -> calculator(0, true, 0));
             b_division.addActionListener(event -> calculator(0, false, 4));
             b_sum.addActionListener((event) ->
-            calculator(0, false, 0));
+                    calculator(0, false, 0));
             b_add.addActionListener((event) -> calculator(0, false, 1));
             b_sub.addActionListener(event -> calculator(0, false, 2));
             b_mult.addActionListener((event -> calculator(0, false, 3)));
@@ -130,11 +130,11 @@ public class CalculatorFrame extends JFrame
             switch (s)
             {
                 case 0:
-                     calculatorPanel.symbol_display.setText("谢谢使用");
-                     break;
+                    calculatorPanel.symbol_display.setText("谢谢使用");
+                    break;
                 case 1:
-                     calculatorPanel.symbol_display.setText("+");
-                     break;
+                    calculatorPanel.symbol_display.setText("+");
+                    break;
                 case 2:
                     calculatorPanel.symbol_display.setText("*");
                     break;
@@ -156,19 +156,19 @@ public class CalculatorFrame extends JFrame
                     answer.add(sum);
                     break;
                 case 1:
-                    sum=Math.sin(sum);
+                    sum = Math.sin(sum);
                     answer.add(sum);
-                    fuck=0;
+                    fuck = 0;
                     break;
                 case 2:
-                    sum=Math.cos(sum);
+                    sum = Math.cos(sum);
                     answer.add(sum);
-                    fuck=0;
+                    fuck = 0;
                     break;
                 case 3:
-                    sum=Math.tan(sum);
+                    sum = Math.tan(sum);
                     answer.add(sum);
-                    fuck=0;
+                    fuck = 0;
                     break;
 
             }
@@ -238,9 +238,9 @@ public class CalculatorFrame extends JFrame
         public CalculatorPanel()
         {
             setBackground(Color.WHITE);
-            setLayout(new GridLayout(2,1));
+            setLayout(new GridLayout(2, 1));
             display = new JLabel("欢迎使用计算器!", JLabel.CENTER);
-            symbol_display=new JLabel("符号显示",JLabel.CENTER);
+            symbol_display = new JLabel("符号显示", JLabel.CENTER);
 
             add(display);
             add(symbol_display);

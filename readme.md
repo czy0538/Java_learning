@@ -1,5 +1,6 @@
 
 
+
 ## 0 易混总结
 
 ### 1static和final
@@ -355,7 +356,7 @@ public static int getRandomInt(int min, int max) {
 
 ### 4 数组、枚举、字符串、容器
 
-	#### 4.1 数组
+#### 4.1 数组
 
 - Java将数组作为对象来处理
 
@@ -486,8 +487,13 @@ enum 枚举名
 #### 4.4 容器
 
 - Collection接口：存放独立元素的序列。
+
 - Map接口：存放key-value型的元素对。
-- 四个常用的容器：
+
+- 常用的容器：
+  
+  - Vector
+  
   - LinkedList：其数据结构采用的是链表，此种结构的优势是删除和添加的效率很高，但随机访问元素时效率较ArrayList类低。
   - ArrayList：其数据结构采用的是线性表，此种结构的优势是访问和查询十分方便，但添加和删除的时候效率很低。
   - HashSet：不允许其中存在重复的元素，无法添加一个重复的元素，利用Hash函数进行了查询效率上的优化。
@@ -727,7 +733,7 @@ enum 枚举名
 
 - Java允许一个类实现(implements)多个接口，从而实现比多重继承更加强大的能力。
 
-- 接口也具有数据成员与方法，但数据成员一定要赋初值，且此值不能再更改，而方法必须是“抽象方法”。
+- **接口也具有数据成员与方法，但数据成员一定要赋初值，且此值不能再更改，而方法必须是“抽象方法”。**
 
   ```java
   interface Storage
@@ -865,3 +871,532 @@ enum 枚举名
 - 类型参数可以使用任何字符串，通常约定使用大写字母，
 - 创建范型类的具体实例，必须用具体的数据类型来替换类定义中的类型参数表中的范型类型并用尖括号括起
 - 有界类型参数：在特定的应用中，可能希望**定义的范型是某个类或其子类类型**，而不是全部的子类类型，这种有所限制的范型称为有界范型。定义：<T extends 类名或接口名>;
+
+## 6.异常
+
+- 异常(Exception)是正常程序流程所不能处理或没有处理的异常情况或异常事件
+- 按照异常在**编译时是否被检测**来分，异常可分为受检异常(Checked Exception)与非受检异常(Unchecked Exception)。非受检异常：在编译时不能被Java编译器检测到。非受检异常包括运行yan时异常(Runtime Exception)和错误(Error)。
+- 根据**异常的严重性**，异常又可以分为程序可以处理的异常和错误异常。
+  - 程序可处理异常：程序可处理的异常是非致命性的，通过某种修正后程序还能继续执行，这类异常也称为例外。可处理异常借助于程序员的干涉是可以恢复的。
+  - 错误异常：错误异常是致命性的，不能简单地恢复执行。
+
+
+
+### 6.1 基本概念
+
+- 异常对象：在一个方法运行过程中，如果发生了异常，称程序产生了一个异常事件，相应地生成异常对象。这个对象中包含了该异常必要的详细信息，包括所发生的异常事件类型及异常发生时程序的状态。
+- 抛出异常：我们将生成异常对象并把它提交给运行时系统的这一过程称为抛出(throw)一个异常。
+- 捕获：异常发生时，Java运行时系统从生成对象的代码块开始进行回溯，沿方法的调用栈逐层回溯，寻找相应的处理代码，直到找到包含相应异常处理的方法为止，并把异常对象交给方法处理，这一个过程为捕获。
+
+- 异常的处理借助于调用堆栈按先近后远的原则进行。
+
+### 6.2 异常处理
+
+- 异常处理：对所发生的异常进行的处理。
+
+- 异常处理的方式有两种：**捕获异常和转移异常。**
+
+  - 捕获异常：通过try-catch-finally结构处理，格式如下
+
+    ```java
+    try{
+             //此处为抛出具体异常的代码
+         }catch(ExceptionType1 e){
+             //抛出ExceptionType1异常时要执行的代码
+         }catch(ExceptionType2 e){
+              //抛出ExceptionType2异常时要执行的代码
+          } 
+          ……
+          catch(ExceptionTypek e){
+               //抛出ExceptionTypek异常时要执行的代码
+          }finally{
+               //必须要执行的代码
+          }
+    }
+    
+    ```
+
+  - 转移异常：程序不在当前方法内处理异常，而是把异常抛出到调用方法中。
+
+    ```java
+    <访问权限修饰符><返回值类型><方法名>(参数列表) throws 异常列表{
+         方法体；
+    }
+    ```
+
+    ![image-20191109203437778](D:\A personal date\GitHub\Java_learning\image-20191109203437778.png)
+
+- 	public String toString()//使用getMessage()的结果返回类的串级名字。
+
+  
+
+## 7Swing
+
+### 7.1 AWT与Swing
+
+- AWT和Swing区别
+  - **AWT**是基于本地方法的C/C++程序，其**运行速度比较快**，**Swing**是基于AWT的Java程序，其**运行速度比AWT要慢。**
+  - AWT的控件在不同的平台可能表现不同，而**Swing在所有平台表现是一致的。**
+  - **Swing要比AWT拥有更多的功能**。由于Swing是在AWT基础上扩展而来的，因此Swing依赖于AWT顶层容器，除此之外，Swing几乎实现了所有平台上的标准组件。
+- 组件
+  - 组件：组件是指构成图形界面的元素，在Java中用类表示，如按钮(JButton)、标签(JLabel)、列表(JList)和文本框(JText)等。
+  - 组件分类
+    - 基本组件：不包含其它组件的组件称为基本组件或者原子组件。
+    - 容器组件：包含其它组件的组件称为容器组件，或简称为容器。容器又可以进一步分为顶层容器和非顶层容器(中间容器)。
+
+### 7.2 容器
+
+```java
+public static void main(String[] args) {
+    //我也不知道是啥东西，但是写上就不会出问题了
+        EventQueue.invokeLater(() -> {
+            //所有的框架类在这里新建
+            CalculatorFrame frame=new CalculatorFrame();
+        });
+    }
+
+class Frame extends JFrame
+{
+	//定义框架的默认像素
+	private final int screenHeight；
+    private final int screenWidth；
+	public Frame(	)
+	{
+	//可选，可以获得当前屏幕的分辨率信息
+	Toolkit kit = Toolkit.getDefaultToolkit();
+    Dimension screenSize = kit.getScreenSize();
+    screenHeight = screenSize.height;
+  	screenWidth = screenSize.width;
+    //设置默认的大小
+    setSize(screenWidth / 4, screenHeight / 2);
+    //或者使用自适应大小
+    pack();
+    //设置位置是否随平台改变
+    setLocationByPlatform(true);
+    //设置标题
+    setTitle("CZY's small calculator");
+    //设置关闭按钮行为
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //可见性设定，一定放在最后
+    setVisible(true);
+	}
+	//以上内容也可以不写在构造函数中，而是通过访问对象来设置。
+}
+```
+
+
+
+#### 7.2.1 顶层容器
+
+- 默认布局管理器为BorderLayout
+
+- JFrame：是一个带有标题行和控制按钮(最小化、恢复/最小化、关闭)的独立窗口，创建应用程序时需要使用JFrame。
+- JApplet：创建小应用程序时使用JApplet，它被包含在浏览器窗口中。
+- JDialog：创建对话框时使用JDialog。
+- JWindow：是一个不带有标题行和控制按钮的窗口。
+
+#### 7.2.2 内容窗格
+
+- 每个**顶层容器**都有一个内容窗格(ContentPane)，顶层容器中除菜单之外的组件都放在这个内容窗格中。
+
+- 将组件放进内容窗格方法：
+
+  - 直接用frame.add()
+- 使用内置的container
+  
+  ```java
+    Container contentPane=frame.getContentPane();
+    contentPane.add(button, BorderLayout.CENTER); 
+  ```
+
+- 创建新的内容窗格取代顶层容器默认的内容窗格。 
+
+  ```java
+  //创建一个JPanel实例
+  JPanel contentPane=new JPanel();
+  //设置JPanel实例的布局管理器
+  contentPane.setLayout(new BorderLayout());
+  //将Button组件实例添加到JPanel实例中
+  contentPane.add(button, BorderLayout.CENTER);
+  /**通过顶层容器的setContentPane方法将JPanel实例设置为新的内容窗格**/
+  frame.setContentPane(contentPane); 
+  ```
+
+#### 7.2.3 面板JPanel
+
+- 面板属于中间容器，不能独立存在但可以嵌套，面板必须被添加到其他容器内部。
+- 默认布局管理器为FlowLayout
+
+### 7.3 布局管理器
+
+通过容器的**setLayout()**方法改变容器的布局管理器。
+
+#### 7.3.1FlowLayout
+
+- 对容器中组件进行布局的方式是将组件逐个地安放在容器中的一行上，一行放满后就另起一个新行。
+
+- JPanel的默认布局管理器
+
+- ```java
+  setLayout(new FlowLayout(int align, int hgap, int vgap));
+  add(button);
+  ```
+- align设定组件的对齐方式，取值有FlowLayout.LEFT、FlowLayout.RIGHT和FlowLayout.CENTER三种方式，分别表示左对齐、右对齐、居中。
+
+- hgap和vgap设定组件的水平和垂直间距。
+
+#### 7.3.2BorderLayout
+
+- BorderLayout是顶层容器中内容窗格的默认布局管理器，每个由BorderLayout管理的容器被划分成北(North)、南(South)、西(West)、东(East)、中(Center)五个区域，在每个区域可以加入一个组件。
+
+- ```java
+  setLayout(new BorderLayout(int hgap, int vgap));
+  add(button,BorderLayout.SOUTH);//组件添加位置
+  ```
+
+- hgap和vgap设定组件的水平和垂直间距。
+
+#### 7.3.3GridLayout
+
+- GridLayout是一种网格式的布局管理器，它将容器空间划分成若干行乘若干列的网格，组件依次放入其中，每个组件占据一格。
+
+- ```java
+  setLayout(new GridLayout(int rows, int cols, int hgap, int vgap));
+  add(button)
+  ```
+
+- rows和cols分别指定网格的行数和列数。
+  hgap和vgap分别表示网格间的水平间距和垂直间距。
+
+#### 7.3.5 CardLayout
+
+- 卡片式布局管理器，它将容器中的组件处理为一系列卡片，每一时刻只显示出其中的一张。
+
+#### 7.3.5BoxLayout
+
+- 它将容器中的组件按水平方向排成一行或按垂直方向排成一列。当组件排成一行时，每个组件可以有不同的宽度；当组件排成一列时，每个组件可以有不同的高度。
+
+- ```java
+  setLayout(new BoxLayoutLayout(Container target, int axis));
+  add(button);
+  ```
+
+- target指明是为哪个容器设置此布局管理器；
+
+- axis指明组件的排列方向，**BoxLayout.X_AXIS、BoxLayout.Y_AXIS**分别表示按水平方向排列和按垂直方向排列。
+
+### 7.4 事件处理
+
+- 事件是用户在界面上的一个操作（通常使用各种输入设备，如：鼠标、键盘等来完成）。
+
+- 事件源：产生事件的组件叫事件源
+
+- 事件处理器（事件处理方法）：事件处理器是一个接收事件对象并进行相应处理的方法。事件处理器包含在一个类中，这个类的对象负责检查事件是否发生，若发生就激活事件处理器进行处理。
+
+- 事件监听器类：
+
+  - 包含事件处理器，并负责检查事件是否发生，若发生就激活事件处理器进行处理的类叫做事件监听器类，其实例就是事件监听器对象。
+  - 事件监听器类必须实现事件监听器接口或继承事件监听器适配器类。
+  - 事件监听器接口定义了处理事件必须实现的方法。
+  - 事件监听器适配器类是对事件监听器接口的简单实现，目的是为了减少编程的工作量。
+
+- 注册事件监听器：必须在事件源上注册事件监听器。这是通过使用事件源组件的以下方法来完成的：
+  addXxxListener（事件监听器对象）
+
+- 事件监听器需要包括以下两部分内容
+
+  ```java
+  public class MyListener implements ActionListener
+      {
+  
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+              //do something
+          }
+      }
+     
+  
+  然后，在一个或多个组件上可以进行监听器类的实例的注册。如：
+      组件对象.addActionListener(MyListener对象); 
+  //对于只有一个动作的监听器可以用lambda表达式
+  exitButton.addActionListener(event()->｛System.exit(0)});
+  ```
+
+  
+
+### 7.5 按钮
+
+```java
+//普通按钮
+Jbutton(String text, Icon icon);
+
+//切换按钮(JToggleButton)
+JToggleButton(String text, Icon icon,boolean selected默认状态);
+isSelected();//判断是否被选中
+
+//复选按钮(JCheckBox)及单选按钮(JRadioButton)
+//第一个是方形的，第二个是圆形的，别的一样
+//不分组可以多选，分组后组内只能单选，不同组可以多选
+ButtonGroup g1=new ButtonGroup( );
+JCheckBox f=new JCheckBox("f");
+g1.add(f);        
+
+```
+
+### 7.6 复选框 **JComboBox**  
+
+- 对于不可编辑的JComboBox，用户只在能在现有的选项列表中进行选择。
+
+- 对于可编辑的JComboBox，用户既可以在现有选项中选择，也可以输入新的内容。
+
+- setEditable(boolean)设置是否可编辑，默认是不可编辑的。
+
+  ```java
+  JComboBox<String> jcb1;
+  String[] itemList={“One”,”Two”,”Three”,”Four”,”Five”};
+  jcb1=new JComboBox(itemList);
+  jcb1.setSelectedIndex(1);//选择条目
+  jcb1.setVisible(true);//是否可以编辑
+  jcb1.getSelectedItem().toString();//得到选择的项目
+  ```
+
+### 7.7 JList
+
+- 列表(JList)是可供用户进行选择的一系列可选项。
+
+  ```java
+  String[] listData={“one”, “two”, “three”, “four”};
+  JList jl=new JList(listData);
+  ```
+
+- 列表对象本身并不带滚动条，但是当列表可选项较多时，可将列表对象放入JScrollPane中。 
+
+### 7.8 文本组件
+
+```java
+//创建一个文本框，其初始内容由参数text指定，首选宽度由参数columns指定，如果参数columns被设置为0，则首选宽度将是组件实现的自然结果。
+JTextField(String text, int columns);
+```
+
+### 7.9 菜单组件
+
+```java
+//菜单栏是窗口中的主菜单，用来包容一组菜单。
+JFrame frame=new JFrame(“Menu Demo”);
+JMenuBar mb=new JMenuBar();
+frame.setJMenuBar(mb); 
+//菜单(JMenu)
+JMenu menu1=new JMenu(“File”);
+JMenu menu2=new JMenu(“Edit”);
+JMenu menu3=new JMenu(“Source”);
+mb.add(menu1);
+mb.add(menu2);
+mb.add(menu3);
+//菜单项
+JMenuItem mi1=new JMenuItem(“New”, KeyEvent.VK_S);
+JMenuItem mi2=new JMenuItem(“Open”);
+mi2.setMnemonic(KeyEvent.VK_O);//设置快捷键
+JMenuItem mi3=new JMenuItem(“Close”, KeyEvent.VK_C);
+menu1.add(mi1);
+menu1.add(mi2);
+menu1.add(mi3);
+```
+
+### 7.10 对话框
+
+- 分为标准对话框和选择对话框
+- 对话框为顶层容器，选择附着的frame
+- JDialog 默认的弹出对话框
+- 确认对话框(showConfirmDialog)：显示问题，要求用户确认(yes/no/cancel)。
+- 输入对话框(showInputDialog)：提示用户输入。
+- 信息对话框(showMessageDialog)：显示信息，告知用户发生了什么情况。
+- 选项对话框(showOptionDialog)：显示选项，要求用户选择。
+
+```java
+package PPT7;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Test3
+{
+    public static void main(String[] args)
+    {
+        EventQueue.invokeLater(() ->
+        {
+            MyFrame frame = new MyFrame();
+        });
+    }
+
+}
+
+class MyFrame extends JFrame
+{
+
+    JLabel text;
+    public MyFrame()
+    {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(300, 400);
+        setTitle("对话框功能测试");
+        add(new MyPanel(), BorderLayout.CENTER);
+        add(new TextPanel(), BorderLayout.NORTH);
+        //dialog();
+        //add(jd); 对话框无需加入，因为他是顶层容器
+        setVisible(true);
+
+    }
+
+    class TextPanel extends JPanel
+    {
+        public TextPanel()
+        {
+            text = new JLabel("文本显示");
+            setSize(300, 200);
+            add(text);
+
+        }
+    }
+
+    class MyPanel extends JPanel
+    {
+        public MyPanel()
+        {
+            JButton b1 = new JButton("show dialog");
+            JButton b2 = new JButton("showMessageDialog");
+            JButton b3 = new JButton("showConfirmDialog");
+
+            add(b1);
+            add(b2);
+            add(b3);
+
+            b1.addActionListener((event) -> {
+                dialog();
+            });
+
+            b2.addActionListener((event) -> {
+                messageDialog();
+            });
+            b3.addActionListener((event) -> {
+                confirmDialog();
+            });
+        }
+
+        void dialog()
+        {
+            JDialog jd = new JDialog(MyFrame.this, "hehe", true);
+            JTextField jt = new JTextField("oh yearrrrrrrrrr");
+            jd.add(jt);
+             //关闭该对话框进程，但不结束虚拟机
+            jd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+           
+            jd.setVisible(true);//顶层容器自己的可视化设置
+            //隐藏该对话框，不关闭进程
+            //jd.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        }
+
+        void messageDialog()
+        {
+            //通过静态方法实现
+            JOptionPane.showMessageDialog(MyFrame.this,
+                    "这是消息对话框的内容",
+                    "这是消息对话框的标题",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+        void confirmDialog()
+        {
+            //返回值为选择的选项
+            int confirm = JOptionPane.showConfirmDialog(MyFrame.this,
+                    "确认对话框信息",
+                    "确认对话框标题",
+                    JOptionPane.YES_NO_CANCEL_OPTION);
+            switch (confirm)
+            {
+                case JOptionPane.YES_OPTION:
+                    text.setText("Yes");
+                    break;
+                case JOptionPane.NO_OPTION:
+                    text.setText("NO");
+                    break;
+                case JOptionPane.CANCEL_OPTION:
+                    text.setText("CANCEL");
+                    break;
+                case JOptionPane.CLOSED_OPTION:
+                    text.setText("CLOSED");
+                    break;
+                default:
+                    text.setText("default");
+
+            }
+        }
+        
+        void showInputDialog()
+        {
+            String[] selections = new String[]{"first", "second", "third"};
+            var select=JOptionPane.showInputDialog(MyFrame.this,
+                    "输入选择对话框",
+                    "标题栏",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    selections,
+                    selections[0]
+            );
+            if (select!=null)
+            {
+                text.setText(select.toString());
+            }
+            else
+            {
+                text.setText("closed");
+            }
+        }
+
+    }
+}
+```
+
+- 文件对话框（JFileChooser）
+
+  ```java
+  package PPT7;
+  
+  import javax.swing.*;
+  import java.awt.event.ActionEvent;
+  import java.awt.event.ActionListener;
+  import java.io.File;
+  
+  public class FileChooser extends JFrame implements ActionListener
+  {
+      JButton open=null;
+      public static void main(String[] args) {
+          new FileChooser();
+      }
+      public FileChooser(){
+          open=new JButton("open");
+          this.add(open);
+          this.setBounds(400, 200, 100, 100);
+          this.setVisible(true);
+          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+          open.addActionListener(this);
+      }
+      @Override
+      public void actionPerformed(ActionEvent e) {
+          // TODO Auto-generated method stub
+          JFileChooser jfc=new JFileChooser();
+          jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
+          jfc.showDialog(new JLabel(), "选择");
+          File file=jfc.getSelectedFile();
+          if(file.isDirectory()){
+              System.out.println("文件夹:"+file.getAbsolutePath());
+          }else if(file.isFile()){
+              System.out.println("文件:"+file.getAbsolutePath());
+          }
+          System.out.println(jfc.getSelectedFile().getName());
+      }
+  }
+  
+  ```
+
+  

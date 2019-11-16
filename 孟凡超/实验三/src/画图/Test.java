@@ -1,7 +1,23 @@
 package 画图;
 
+import edu.princeton.cs.algs4.StdOut;
+
 public class Test
 {
+
+    public static void main(String[] args)
+    {
+        Triangle triangle=new Triangle(3,4,5);
+        Circle circle=new Circle(3);
+        Trapezoid trapezoid=new Trapezoid(3,3,3);
+        StdOut.println(triangle.getPerimeter());
+        StdOut.println(triangle.getArea());
+        StdOut.println(circle.getArea());
+        StdOut.println(circle.getPerimeter());
+        StdOut.println(trapezoid.getArea());
+
+    }
+
 }
 
 class Triangle
@@ -12,21 +28,21 @@ class Triangle
     {
     }
 
-    public Triangle(double a, double b, double c)
+    public Triangle(double a, double b, double c)//构造函数
     {
         setA(a);
         setB(b);
         setC(c);
     }
 
-    public double getPerimeter()
+    public double getPerimeter()//求边长
     {
         if (isTriangle())
             return perimeter = a + b + c;
         else return -1;
     }
 
-    public double getArea()
+    public double getArea()//求面积
     {
         if (isTriangle())
         {
@@ -55,7 +71,7 @@ class Triangle
     private boolean isTriangle()
     {
         return a + b > c && a + c > b && b + c > a;
-    }
+    }//判断是否为三角形
 
     public double getB()
     {
@@ -80,7 +96,7 @@ class Trapezoid
     public Trapezoid()
     {
     }
-
+    //构造函数
     public Trapezoid(double top, double bottom, double height)
     {
         setBottom(bottom);

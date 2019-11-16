@@ -124,7 +124,7 @@ class ClientFrame extends JFrame
         screenWidth = screenSize.width;
         setSize(screenWidth / 2, screenHeight / 2);
         setLocationByPlatform(true);
-        setTitle("性感子龙，在线陪聊");
+        setTitle("聊天室");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
