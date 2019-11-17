@@ -2281,3 +2281,288 @@ public class ReadURL
 - 当客户端需要连接时，相应地要生成一个Socket实例对象，并发出连接请求，其中host参数指明该主机名，port参数指明该主机端口号。
 - 服务器端通过accept()方法接收到客户端的请求后，开辟一个接口与之进行连接，并生成所需的I/O数据流。
 - 客户端和服务器端的通信都是通过一对InputStream和OutputStream进行的。通信结束后，两端分别关闭对象的Socket接口。
+
+示例：多人聊天室
+
+服务器端：
+
+接收新创建的服务器：
+
+```java
+package ppt12.server;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Vector;
+
+public class Server
+{
+
+    //存储多个服务器的地址
+    private static Vector<Socket> socketlist = new Vector<Socket>();
+
+    public static void main(String[] args) {
+        try {
+
+            ServerSocket ss = new ServerSocket(50000);//设置socket服务器端口
+            while(true){
+                Socket s = ss.accept();//接受连接并返回socket对象
+                socketlist.add(s);
+                //打印socketlist中全部的元素，并调用每个socketlist的toString方法
+                System.out.println(socketlist);
+                new Thread(new DispatcherMessage(s,socketlist)).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+消息广播端：
+
+```java
+package ppt12.server;
+
+import java.io.*;
+import java.net.Socket;
+import java.util.Vector;
+
+public class DispatcherMessage implements Runnable
+{
+    //消息广播
+    private Socket s = null;
+    private BufferedReader br = null;
+    private Vector<Socket> socketlist = null;
+
+    public DispatcherMessage(Socket s, Vector<Socket> socketlist)
+    {
+        this.socketlist = socketlist;
+        this.s = s;
+        try
+        {
+            br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void DispathcherMessage()
+    {
+
+        String result = null;
+        try
+        {
+            while ((result = br.readLine()) != null)
+            {
+                //对每个socket进行广播
+                for (Socket allsocket : socketlist)
+                {
+                    //向除了s（发送端）之外的所有接收端发送消息
+                    if (!s.equals(allsocket))
+                    {
+                        //服务器端的输出
+                        System.out.println(allsocket.toString()+"收到了:"+result );
+
+                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(allsocket.getOutputStream()));
+                        bw.write(result);
+                        bw.newLine();//一定不能忘了！！！
+                        bw.flush();
+                    }
+                }
+            }
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void run()
+    {
+        while (true)
+        {
+            DispathcherMessage();
+        }
+    }
+}
+
+```
+
+客户端
+
+客户服务器创建：
+
+```java
+package ppt12.cilent;
+
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class Cilent
+{
+    /*
+     * 任务：
+     * 1.为每一个Client用户创建一个Socket
+     * 2.开启发送线程
+     * 3.开启接受线程
+     */
+    public static void main(String[] args) throws Exception
+    {
+        //创建Socket
+        Socket ss = new Socket(InetAddress.getLocalHost(), 50000)//主机地址，主机端口号;
+        //接收消息线程
+        new Thread(new ReceiceMessage(ss)).start();
+        //发送消息线程
+        new Thread(new SendMessage(ss)).start();
+    }
+}
+```
+
+客户信息发送
+
+```java
+package ppt12.cilent;
+
+import java.io.*;
+import java.net.Socket;
+
+public class SendMessage implements Runnable
+{
+
+    private BufferedWriter bw = null;
+    private Socket s;
+
+    public SendMessage(Socket s)
+    {
+        try
+        {
+            this.s=s;
+            //消息发送流
+            bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void Writer()
+    {
+        //从控制台读取信息
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String result = null;
+        try
+        {
+            while ((result = br.readLine()) != null)
+            {
+                //标明发送方
+                result=s.toString()+"说"+result;
+                bw.write(result);
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void run()
+    {
+        while (true)
+        {
+            Writer();
+        }
+    }
+}
+
+```
+
+客户信息接受
+
+```java
+package ppt12.cilent;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+
+public class ReceiceMessage implements Runnable
+{
+    //author pzh hueedu
+    /*
+     * 拿到Socket的对应的接受流 死循环接受数据并打印在控制台上
+     */
+    private Socket s;
+    private BufferedReader br = null;
+
+    public ReceiceMessage(Socket s)
+    {
+        try
+        {
+            this.s = s;
+            //信息读取流
+            this.br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String recive()
+    {//函数目的 把收到一行数据返回
+
+
+        String result = null;
+        try
+        {
+            while ((result = br.readLine()) != null)
+            {
+                System.out.println(s.toString() + "接受到了服务器端数据:" + result);
+            }
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void run()
+    {//死循环 用于输出接受到的数据
+        while (true)
+        {
+            recive();
+        }
+    }
+}
+```
+
+#### 10.4.2ServerSocket主要方法
+
+| **方法名**                      | **功能说明**                                                 |
+| ------------------------------- | ------------------------------------------------------------ |
+| Socket accept()                 | 接收该连接并返回该连接的Socket对象                           |
+| void close()                    | 关闭此服务器的Socket                                         |
+| InetAddress getInetAddress()    | 获取该服务器Socket所绑定的地址                               |
+| int getLocalPort()              | 获取该服务器Socket所侦听的端口号                             |
+| int getSoTimeout()              | 获取连接的超时数                                             |
+| void setSoTimeout(int  timeout) | 设置连接的超时数，参数表示 ServerSocket  的 accept()  方法等待客户连接的超时时间。如果参数值为  0 ,  表示永远不会超时，进入阻塞状态  这也是它的默认值 |
+
+#### 10.4.3 Socket主要方法
+
+| 方法名                          | 功能说明                             |
+| ------------------------------- | ------------------------------------ |
+| void  close()                   | 关闭Socket连接                       |
+| InetAddress getInetAddress()    | 获取当前连接的远程主机的Internet地址 |
+| InputStream  getInputStream()   | 获取Socket对应的输入流               |
+| InetAddress  getLocalAddress()  | 获取本地主机的Internet地址           |
+| int  getLocalPort()             | 获取本地连接的端口号                 |
+| OutputStream  getOutputStream() | 获取该Socket的输出流                 |
+| int  getPort()                  | 获取远程主机端口号                   |
+| void  shutdownInput()           | 关闭输入流                           |
+| void  shutdownOutput()          | 关闭输出流                           |

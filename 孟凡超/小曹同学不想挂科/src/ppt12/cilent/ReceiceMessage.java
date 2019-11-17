@@ -19,6 +19,7 @@ public class ReceiceMessage implements Runnable
         try
         {
             this.s = s;
+            //信息读取流
             this.br = new BufferedReader(new InputStreamReader(s.getInputStream()));
         } catch (IOException e)
         {
@@ -29,14 +30,13 @@ public class ReceiceMessage implements Runnable
     public String recive()
     {//函数目的 把收到一行数据返回
 
-        String test = null;
+
         String result = null;
         try
         {
-            while ((test = br.readLine()) != null)
+            while ((result = br.readLine()) != null)
             {
-                result = test;
-                System.out.println(s.getInetAddress() + "接受到了服务器端数据" + result);
+                System.out.println(s.toString() + "接受到了服务器端数据:" + result);
             }
 
         } catch (IOException e)

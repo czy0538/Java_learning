@@ -5,8 +5,6 @@ import java.net.Socket;
 
 public class Cilent
 {
-
-    //author pzh hueedu
     /*
      * 任务：
      * 1.为每一个Client用户创建一个Socket
@@ -15,8 +13,11 @@ public class Cilent
      */
     public static void main(String[] args) throws Exception
     {
+        //创建Socket
         Socket ss = new Socket(InetAddress.getLocalHost(), 50000);
+        //接收消息线程
         new Thread(new ReceiceMessage(ss)).start();
+        //发送消息线程
         new Thread(new SendMessage(ss)).start();
     }
 }
