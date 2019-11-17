@@ -1,24 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 0 易混总结
 
 ### 1static和final
@@ -148,7 +128,7 @@ static final修饰的属性表示一旦给值，就不可修改，并且可以�
 
 ### 2.4 基本数据类型
 
-![image-20191101190714017](D:\A personal date\GitHub\Java_learning\image-20191101190714017.png)
+![image-20191101190714017]( image-20191101190714017.png)
 
 #### 2.4.1.1 boolean
 
@@ -162,14 +142,14 @@ static final修饰的属性表示一旦给值，就不可修改，并且可以�
 
 #### 2.4.1.3 整数类型
 
-![image-20191101191102752](D:\A personal date\GitHub\Java_learning\image-20191101191102752.png)
+![image-20191101191102752]( image-20191101191102752.png)
 
 - 整数类型常量可以用十进制、八进制或十六进制形式表示。八进制以0开头，16进制以0x开头
 - 默认为int型，若想表示long型**必须加l**
 
 #### 2.4.1.4 浮点型
 
-![image-20191101191710694](D:\A personal date\GitHub\Java_learning\image-20191101191710694.png)
+![image-20191101191710694]( image-20191101191710694.png)
 
 - 整型0/0会报错，浮点型不会
 - 默认为double，若想用float**必须加f**
@@ -259,13 +239,13 @@ static final修饰的属性表示一旦给值，就不可修改，并且可以�
   
     
 
-### 3表达式与流程控制
+## 3表达式与流程控制
 
-#### 3.1 表达式
+### 3.1 表达式
 
 - 表达式：由**运算符和操作数**组成，对操作数进行运算符指定的操作，并得出一个结果
 
-##### 3.1.1操作数
+#### 3.1.1操作数
 
 - 常量：
 
@@ -296,7 +276,7 @@ static final修饰的属性表示一旦给值，就不可修改，并且可以�
     - 方法中定义的局部变量的作用域是从该变量的说明处开始到包含该说明的语句块结束处，块外是不可使用的。
     - 块内说明的变量将屏蔽其所在类定义的同名变量。但是同一块中如果定义两个同名变量则将引起冲突。
 
-##### 3.1.2 运算符
+#### 3.1.2 运算符
 
 - 算术运算符
 
@@ -321,7 +301,7 @@ static final修饰的属性表示一旦给值，就不可修改，并且可以�
 
   
 
-##### 3.1.3 数学函数
+#### 3.1.3 数学函数
 
 Math.random(). 返回0.0到1.0之间双精度的一个随机数
 
@@ -333,14 +313,14 @@ public static int getRandomInt(int min, int max) {
     }
 ```
 
-#### 3.2 控制流
+### 3.2 控制流
 
-##### 3.2.1语句
+#### 3.2.1语句
 
 - 语句是Java的最小执行单位
 - 分为简单语句和复合语句，复合语句就是花括号括起来的语句组，也称作快
 
-##### 3.2.2 控制语句
+#### 3.2.2 控制语句
 
 - if语句
 - switch语句
@@ -348,7 +328,7 @@ public static int getRandomInt(int min, int max) {
   - Java规定switch语句不允许使用浮点型或long型表达式。
   - default语句可选
 
-##### 3.2.3 循环语句
+#### 3.2.3 循环语句
 
 - for语句：for循环语句适用于明确知道重复执行次数情况
 
@@ -361,7 +341,7 @@ public static int getRandomInt(int min, int max) {
 
 - do while循环结构语句：它总是先执行一次循环体，然后判断条件表达式的值是否为真，若为真，则继续执行循环体；否则循环执行结束
 
-##### 3.2.4转移语句
+#### 3.2.4转移语句
 
 - break
   - break语句可用于switch语句，for、while及do等循环语句和块语句中。
@@ -372,13 +352,13 @@ public static int getRandomInt(int min, int max) {
   - 立即结束当次循环而执行下一次循环
   - continue语句可以和标号一起使用，其语法格式为：continue 标号; 它立即结束标号标记的那重循环的当次循环，开始执行下一次循环
 
-### 4 数组、枚举、字符串、容器
+## 4 数组、枚举、字符串、容器
 
-#### 4.1 数组
+### 4.1 数组
 
 - Java将数组作为对象来处理
 
-##### 4.1.1 一维数组的定义
+#### 4.1.1 一维数组的定义
 
 ```java
 type arrayName[];
@@ -388,7 +368,7 @@ Type[] arrayName;
 - 定义并不会为数组元素分配内存，因此[] 中不需要指出数组长度。
 - 这只是个引用，并不会真正分配内存空间。
 
-##### 4.1.2 一维数组的创建
+#### 4.1.2 一维数组的创建
 
 非为静态初始化和动态初始化
 
@@ -405,7 +385,7 @@ String names[]={“Zhang”, “Li”, “Wang” };
 
 ```
 
-##### 4.1.3复合类型数组
+#### 4.1.3复合类型数组
 
 复合类型数组使用运算符new为只是为数组本身分配空间，并没有对数组的元素进行初始化。对于复合类型的数组，需要经过两步进行空间分配：
 
@@ -418,13 +398,13 @@ String names[]={“Zhang”, “Li”, “Wang” };
     arrayName[arraySize-1]=new type(paramList); //创建各个数组元素
 ```
 
-##### 4.1.4 数组比较
+#### 4.1.4 数组比较
 
 数组属于引用型变量，因此两个相同类型的数组如果具有**相同的引用**，它们就有完全相同的元素。
 
 即引用相等表示他们指向同一个数组。
 
-##### 4.1.5 数组的遍历
+#### 4.1.5 数组的遍历
 
 - 循环遍历
 
@@ -434,7 +414,7 @@ String names[]={“Zhang”, “Li”, “Wang” };
   Arrays.toString(arrayName);
   ```
 
-##### 4.1.6 多维数组
+#### 4.1.6 多维数组
 
 ```java
 //定义
@@ -453,7 +433,7 @@ arrayN[arraylenth1-1]=new type[arraylength2];
 //即除了最后一维可以不给定长度，其他必须给定长度，且可以生成不同长度的低维数组
 ```
 
-##### 4.1.7 数组复制
+#### 4.1.7 数组复制
 
 System
 
@@ -479,7 +459,7 @@ public static type[] copyOfRange(type[] original, int from, int to)
 
 
 
-#### 4.2 枚举
+### 4.2 枚举
 
 ```java
 enum 枚举名
@@ -488,9 +468,9 @@ enum 枚举名
 }
 ```
 
-![image-20191103145701694](D:\A personal date\GitHub\Java_learning\image-20191103145701694.png)
+![image-20191103145701694]( image-20191103145701694.png)
 
-#### 4.3 字符串
+### 4.3 字符串
 
 - String为不变字符串，StringBuffer为可变字符串
 - 常用方法：
@@ -502,7 +482,7 @@ enum 枚举名
   - subString(int beginIndex, int endIndex)：截取当前字符串中从beginIndex开始到endIndex结尾的子串。
   - replace(char oldChar, char newChar)：将当前字符串中出现的所有oldChar转换为newChar。
 
-#### 4.4 容器
+### 4.4 容器
 
 - Collection接口：存放独立元素的序列。
 
@@ -942,7 +922,7 @@ enum 枚举名
     }
     ```
 
-    ![image-20191109203437778](D:\A personal date\GitHub\Java_learning\image-20191109203437778.png)
+    ![image-20191109203437778]( image-20191109203437778.png)
 
 - 	public String toString()//使用getMessage()的结果返回类的串级名字。
 
@@ -1702,7 +1682,7 @@ public class DataStream
   类PipedInputStream必须和类PipedOutputStream一起使用，来建立一个通信通道。
 - 管道数据流必须同时具备可用的输入端和输出端。
 
-![image-20191116163742567](D:\A personal date\GitHub\Java_learning\image-20191116163742567.png)
+![image-20191116163742567]( image-20191116163742567.png)
 
 ##### 8.2.5 对象流
 
@@ -1794,9 +1774,9 @@ public void newLine()
 
 
 
-![image-20191116170055839](D:\A personal date\GitHub\Java_learning\image-20191116170055839.png)
+![image-20191116170055839]( image-20191116170055839.png)
 
-![image-20191116170117532](D:\A personal date\GitHub\Java_learning\image-20191116170117532.png)
+![image-20191116170117532]( image-20191116170117532.png)
 
 #### 8.4 文件处理
 
@@ -1824,3 +1804,480 @@ myRAFile=new RandomAccessFile(myFile，” rw”);
 
 ```
 
+## 9.线程
+
+### 9.1 进程与线程
+
+- **进程一般是对操作系统而言的。即多个程序几乎在同一时间执行多个任务。**
+- **线程一般是对某程序而言的。即每一程序同一时间内执行多个任务。**
+- **从逻辑的观点来看，多线程意味着一个程序的多行语句同时执行**，但是多线程并不等于多次启动一个程序，操作系统也不会把每个线程当作独立的进程来对待。
+- 两者的粒度不同，是两个不同层次上的概念。**进程是操作系统来管理的，而线程则是在一个程序(进程)内。**
+- 不同进程的代码、内部数据和状态都是完全独立的，而一个程序内的多线程是共享同一块内存空间和同一组系统资源，又可能相互影响。
+- 线程本身的数据通常只有寄存器数据，以及一个程序执行时使用的堆栈，所以线程的切换比进程切换的负担要小。
+- 为了达到多线程的效果，Java语言把线程或执行环境当作一个封装对象，包含CPU及自己的程序代码和数据，由虚拟机提供控制。Java类库中的类java.lang.Thread允许创建这样的线程，并可控制所创建的线程。
+
+### 9.2 并发与并行
+
+- **并发是逻辑上的同时发生，并行是物理上的同时发生。**
+- 并发(concurrency)是指在某一段时间内，从宏观上多个程序在同时运行，但在微观上多个程序之间是串行的。
+- 并行(parallelism)指两个或两个以上的任务同时运行，无论从宏观上看，还是从微观上看，任务都是同时运行的。
+
+### 9.3 Java线程的结构
+
+- 虚拟CPU，封装在java.lang.Thread中，它控制着整个线程的运行。
+- 执行的代码，传递给Thread类，由Thread类控制顺序执行。
+- 处理的数据，传递给Thread类，是在代码执行过程中所要处理的数据。
+- 线程分类：
+  - 普通线程：在Java程序中，若还有非Demon线程，则整个程序不会结束
+  - 守护线程：如果普通线程结束了，守护线程自动终止 setDaemon(true)
+
+### 9.4 线程的状态
+
+#### 9.4.1 Thread类
+
+- Java的线程是通过类Thread来实现的，当生成一个Thread类的对象之后，就产生了一个线程。通过该对象实例，可以启动线程、终止线程，或者暂时挂起线程等。
+- Thread类本身只是线程的虚拟CPU，线程所执行的代码是通过方法run()来完成的，方法run()称为线程体。实现线程体的特定对象是在初始化线程时传递给线程的。
+
+#### 9.4.2 线程的状态
+
+- 新建(new)
+  当一个线程的实例被创建，即使用new关键字和Thread类或其子类创建一个线程对象后，此时该线程处于new状态。处于new状态的线程有自己的内存空间，但**该线程并没有运行，此时线程还不是活着的(not alive)**。
+- 就绪状态(runnable) 
+  **通过调用线程实例的start()方法来启动线程使线程进入就绪状态**处于就绪状态的线程已经具备了运行条件，但还没有被分配到CPU即不一定会被立即执行，此时处于线程就绪队列，等待系统为其分配CPU，等待状态并不是执行状态，此时线程是活着的(alive)。
+
+- 运行状态(running)
+  一旦获取CPU(被JVM选中)，线程就进入运行状态，线程的run()方法才开始被执行。在运行状态的线程执行自己的run()方法中的操作，直到调用其他的方法而终止、或者等待某种资源而阻塞、或者完成任务而死亡。如果在给定的时间片内没有执行结束，就会被系统给换下来回到线程的等待状态；此时线程是活着的(alive)。
+- 阻塞状态(blocked)
+  **通过调用join()、sleep()、wait()或者资源被暂用使线程处于阻塞状态**。处于阻塞状态的线程仍然是活着的(alive) 。
+- 死亡状态(dead)
+  **当一个线程的run()方法运行完毕或被中断或被异常退出**，该线程到达死亡(dead)状态。此时可能仍然存在一个该Thread的实例对象，当该Thread已经不可能在被作为一个可被独立执行的线程对待了。
+  一旦某一线程进入dead状态，他就再也不能进入一个独立线程的生命周期了。对于一个处于Dead状态的线程调用start()方法，会出现一个运行期(runtime exception)的异常。处于dead状态的线程不是活着的(not alive)。
+
+
+
+### 9.5 线程的创建
+
+#### 9.5.1 继承Thread类
+
+- 定义一个线程类，它**继承类Thread并重写其中的方法run()**，这时在初始化这个类的实例时，目标对象target可以为null，表示这个实例本身具有线程体。
+- 由于Java只支持单继承，用这种方法定义的类不能再继承其他类。
+
+#### 9.5.2 实现Runnable接口
+
+- Runnable是Java中用以实现线程的接口，任何实现线程功能的类都必须实现该接口。前面所用到的Thread类就是因为实现了Runnable接口，所以它的子类才相应具有线程功能。
+- Runnable接口中只定义了一个方法就是run()方法，也就是线程体。**用Runnable接口实现多线程时，也必须实现run()方法，常用Thread类的构造方法来创建线程对象。**
+
+```java
+public class CreateThread {
+
+    public static void main(String[] args) {
+        Thread1 thread1 = new Thread1();
+        //声明一个Thread1对象，这个Thread1类继承自Thread类的
+
+        Thread thread2 = new Thread(new Thread2());
+        //传递一个匿名对象作为参数
+
+        thread1.start();
+        thread2.start();
+        //启动线程
+    }
+}
+
+class Thread1 extends Thread {
+    @Override
+    public void run() {
+        //在run()方法中放入线程要完成的工作
+
+        //这里我们把两个线程各自的工作设置为打印100次信息
+        for (int i = 0; i < 100; ++i) {
+            System.out.println("Hello! This is " + i);
+        }
+
+        //在这个循环结束后，线程便会自动结束
+    }
+}
+
+class Thread2 implements Runnable {
+    //与Thread1不同，如果当一个线程已经继承了另一个类时，就建议你通过实现Runnable接口来构造
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; ++i) {
+            System.out.println("Thanks. There is " + i);
+        }
+    }
+}
+```
+
+#### 9.5.3 Thread类的主要方法
+
+- start();  //启动线程
+
+- run(); //用来定义线程对象被调度之后执行的操作，用户必须重写run()方法
+
+- yield(); //强制终止线程执行,给其他同等优先级一个运行的机会
+
+- isAlive(); //测试当前线程是否在活动
+
+- sleep(int millsecond); //使线程休眠一段时间，时间长短由参数所决定
+
+- wait();使线程处于等待状态
+
+  ```java
+  try
+  {
+      Thread.sleep( int millsecond);
+  }
+  catch(InterruptedException e)
+  {
+     	e.printStackTrace();
+  }
+  ```
+
+  
+
+#### 9.5.4 线程的调度
+
+- 时间片轮转调度策略
+- 抢占式调度策略（java采用）
+
+##### 9.5.4.1 Java线程的优先级策略
+
+- 优先级高的先执行，优先级低的后执行。
+
+- 多线程系统会自动为每个线程分配一个优先级，缺省时，继承其父类的优先级。
+
+- 任务紧急的线程，其优先级较高。
+
+- 同优先级的线程按“先进先出”的原则。
+
+- 最大优先级值为10，最小优先级值为1，默认优先级值为5
+
+- 与优先级有关的方法
+
+  ```java
+  Thread类中与优先级有关的方法
+  void setPriority(int newPriority)：重置线程优先级。
+  int : getPriority()：获得当前线程的优先级。
+  static void yield()：使当前线程放弃执行权。
+  ```
+
+##### 9.5.4.2 join方法
+
+- 在某些情况下，需要让某一个线程等待另一个线程执行结束后再开始执行该线程，可以使用线程类的join()方法来实现上述功能。
+
+  ```java
+  package ppt11;
+  
+  import edu.princeton.cs.algs4.StdOut;
+  
+  public class Join
+  {
+      public static void main(String[] args)
+      {
+          Thread c = new Thread(() -> StdOut.println("this is c"));
+          var a = new Thread(new A(c));
+          var b = new Thread(new B(a));
+          a.start();
+          b.start();
+          c.start();
+  
+      }
+  
+  }
+  
+  class A implements Runnable
+  {
+      Thread thread;
+  
+      public A(Thread thread)
+  
+      {
+          this.thread = thread;
+      }
+  
+      @Override
+      public void run()
+      {
+          StdOut.println("A.start");
+          //插入c
+          try
+          {
+              thread.join();
+          } catch (InterruptedException e)
+          {
+              e.printStackTrace();
+          }
+  
+          StdOut.println("A.end");
+  
+      }
+  
+  }
+  
+  class B implements Runnable
+  {
+      Thread thread;
+  
+      public B(Thread thread)
+      {
+          this.thread = thread;
+      }
+  
+      @Override
+      public void run()
+      {
+          StdOut.println("B.start");
+          try
+          {
+              //插入A
+              thread.join();
+          } catch (InterruptedException e)
+          {
+              e.printStackTrace();
+          }
+  
+          StdOut.println("B.end");
+      }
+  }
+  
+  /*
+  结果
+  B.start
+  A.start
+  this is c
+  A.end
+  B.end
+  */
+  ```
+
+  
+
+##### 9.5.3.2 线程的其他控制
+
+- 结束线程：当一个线程从run()方法的结尾处返回时，它自动消亡并不能再被运行，可以将其理解为自然死亡。
+- 中断线程：利用**interrupt()**方法可以使线程中断执行。在程序中调用了线程的interrupt()方法后，通常需要在线程的run()方法中使用**isInterrupt()**进行判断，并根据判断的结果执行相应的操作。
+
+### 9.6线程的同步
+
+- 当一个线程访问共享资源时，就会被共享的资源加锁，其它线程就不能访问被加了锁的资源，直到共享资源的锁被释放为止。这种**确保在同一时刻只允许一个线程访问共享资源的机制，称为线程同步**。
+- **synchronized**来保证线程同步。 synchronized可用于方法和语句块，分别称为方法同步和语句块同步。
+
+- 实例方法同步：对于实例方法， synchronized关键字指定的同步内容是该方法中的所有语句，指定的锁是该方法所在的对象。 
+
+- 静态方法同步：对于类方法， synchronized关键字指定的锁是整个类，指定的同步内容是方法中的所有语句。**只要有一个实例的线程调用了被同步的方法，整个类就被指定所锁**，其它实例的线程在没有获得这个锁之前是无法调用这个类中被同步的方法。
+
+- 语句块同步：以便缩小同步的范围，提高运行效率。
+
+  ```java
+  public synchronized void add() throws InterruptedException{};
+  public static synchronized void add() throws InterruptedException{};
+  public void add() throws InterruptedException{
+      synchronized(lock)
+      {
+          //lock 可以为this(锁当前对象）,或者类名.class（锁整个类）
+      }
+  };
+  
+  ```
+
+  
+
+### 9.7 线程交互
+
+- 解决共享对象的问题
+
+- 等待集合：**每一个类的对象实例都有一个等待集合**，当在该实例上调用方法wait后，线程都会进入到该实例的等待集合中，除非发生下列情况，否则会一直等待在该等待集合中。
+
+  - 其他线程调用了方法notify或notifyAll。
+  - 其他线程调用了方法interrupt中断该线程。
+  - 方法wait的等待时间结束。
+
+- ```java
+  try{
+      wait();
+  }catch(InterruptedException e){
+      e.printStackTrace();
+  }
+  
+  ```
+
+- 方法wait()需要放入方法synchronized修饰的语句或方法中
+
+- 当线程调用方法wait后，**Java虚拟机会让当前线程进入休眠状态，并释放对象同步锁的控制权**，允许其他线程执行同步代码块，要唤醒该线程，**需要在同一个对象上调用notify()或notifyAll()方法。**
+
+- 方法notify和notifyAll不需要放入try{}catch{}语句中、notify和notifyAll的差别在于notify只唤醒一个线程， notifyAll可以唤醒所有线程。
+
+
+
+### 9.8 线程池（略）
+
+
+
+## 10.网络编程
+
+### 10.1 概述
+
+#### 10.1.1计算机网络体系结构
+
+- 计算机网络体系结构：网络层次结构模型与各层协议的集合定义为计算机网络体系结构。
+- 网络协议：是计算机彼此交流的一种“语言”，是网络通信的基础。任何一种通信协议都包含三个组成部分：语法、语义、时序。
+  - 语法：规定了双方“如何讲”，即确定用户数据与控制信息的结构与形式。
+  - 语义：规定了双方准备“讲什么”，即需要发出何种控制信息，以及完成的动作与做出的响应。
+  - 时序：规定双方“何时进行通信”，即对事件实现顺序的详细说明。
+
+#### 10.1.2 TCP/IP网络参考模型
+
+- TCP/IP是一组用于实现网络互连的通信协议。
+- Internet网络体系结构以TCP/IP为核心。
+- 基于TCP/IP的参考模型将协议分成五个层次，它们分别是：**应用层、传输层、网络层、数据链路层、物理层。**
+  - 应用层：**应用层是网络应用程序及其应用层协议存留的地方**。应用层包括许多协议，如HTTP协议(它为Web文档提供了请求和转发)、简单电子邮件传输（SMTP）、文件传输协议（FTP）、网络远程访问协议（Telnet）等。
+  - 传输层：传输层提供了一个在应用程序的客户机和服务器之间传输应用层报文的服务。在因特网中，有两种传输层协议，**即TCP和UDP**。
+    - TCP向它的应用程序提供了面向连接的服务，这种服务包括了应用层报文向目的地的确保传递和流量控制。
+    - UDP向它的应用程序提供无连接服务，它是一种最基本的服务。
+  - 网络层：网络层负责将称为数据报的网络层分组从一台主机移到另一台主机。在源主机中的运输层协议(TCP/ UDP)向网络层递交运输层报文段和目的地址，就像你向邮政信件提供目的地址一样。
+  - 数据链路层：为了将分组从一个节点(主机或分组交换机)移动到路由器上的下一个节点，网络层必须依靠链路层的服务。在每个节点，网络层将数据报下传给链路层，链路层沿着路由将数据报传递给下一个节点，在该下一个节点，链路层将数据报上传给网络层。
+  - 物理层：链路层的任务是从一个网络单元向邻近的网络单元移动整个帧，而物理层的任务是将该帧的一个一个比特从一个节点移动到下一个节点。
+
+#### 10.1.3 基本概念
+
+- IP地址：连接到TCP/IP网络中的每台计算机(或其他设备)都有唯一的地址，这就是IP地址。
+- 端口号(Port)：一台机器只能通过一条链路连接到网络，但一台机器中往往有很多程序需要进行网络通信，仅靠IP地址区分不了各应用程序，这就需要端口号。**端口号是一个标记机器的逻辑通信信道的整整数。端口号取值范围0-65535，其中0-1023为系统所保留。**
+- 套接字(Socket)：传输层是通常是以TCP和UDP协议来控制端点到端点的通信，用于通信的端点是由Socket来定义的，**Socket是由IP地址和端口号组成的。**
+- 传输控制协议(TCP) 
+  - TCP定义了网络上程序到程序的数据传输格式和规则，提供了IP数据包的传输确认、丢失数据包的重新请求、将收到的数据包按照它们的发送次序重新装配的机制，**是一种面向连接的保证可靠传输的协议。**
+  - **发送方和接收方的成对的两个socket之间必须建立连接**，以便在TCP协议的基础上进行通信，当一个socket（通常都是server socket）等待建立连接时，另一个socket可以要求进行连接，一旦这两个socket连接起来，**它们就可以进行双向数据传输，双方都可以进行发送或接收操作。**  
+- 用户数据报协议(UDP)
+  - 与TCP协议不同， **UDP则是一种无连接的传输协议。**
+  - 利用UDP进行数据传输时，首先需要将要传输的数据定义成数据报(Datagram)，在数据报中指明数据所要到达的端点(Socket)，然后再将数据报发送出去。
+  - **UDP是无序的，不能确保绝对的安全可靠，但是它简单、效率高。**
+- 域名：一个域名的目的是便于记忆和沟通的一组服务器的地址。
+- 统一资源定位器(URL)：
+  URL表示Internet上某一资源的地址。 Internet上资源包括HTML文件、图像文件、声音文件、动画文件以及其他任何内容。通过URL就可以访问Internet。浏览器或其他程序通过解析格给定的URL就可以在网络上查找相应的文件或其他资源。
+  一个URL的语法格式如下：
+    <protocol>://<hostname:port>/dir/filename
+
+### 10.2 InetAddress
+
+- 类InetAddress是Java的IP地址封装类
+
+- InetAddress没有构造函数,不能通过new方法获得他的实例
+
+  ```java
+  package ppt12;
+  
+  import edu.princeton.cs.algs4.StdOut;
+  
+  import java.net.InetAddress;
+  import java.net.UnknownHostException;
+  
+  public class Inet
+  {
+      public static void main(String[] args)
+      {
+          InetAddress ia1 = null;
+          InetAddress ia2 = null;
+          InetAddress ia3[] = null;
+          try
+          {
+              ia1 = InetAddress.getByName("www.pornhub.com");//通过机器名、ip、DSN域名获取
+              ia2 = InetAddress.getLocalHost();//得到本机
+              ia3 = InetAddress.getAllByName("www.91porn.com");
+          } catch (UnknownHostException e)
+          {
+              e.printStackTrace();
+          }
+  
+          StdOut.println(ia1.toString());
+          StdOut.println(ia1.getHostName()+ia1.getHostAddress());
+          //上面两句等价
+          StdOut.println(ia2.toString());
+          for (var i : ia3)
+          {
+              StdOut.println(i.toString());
+          }
+      }
+  
+  }
+  ```
+
+
+
+### 10.3 统一资源定位器
+
+#### 10.3.1 URL概念
+
+```java
+URL表示Internet上某种资源的地址。
+一个URL的语法格式如下：
+  <protocol>://<host:port>/filename/reference
+protocol：用来表示所要获取资源的传输协议，如：http、ftp、file等。
+host：用来指示资源所在的主机。
+port：用来指示连接时所使用的通信端口号。
+filename：用来指示该资源在主机的完整文件名。
+reference：指示资源中的某个特定位置。
+```
+
+![image-20191117103345374]( image-20191117103345374.png)
+
+![image-20191117103420349]( image-20191117103420349.png)
+
+####  10.3.2 读入数据
+
+```java
+package ppt12;
+
+import edu.princeton.cs.algs4.StdOut;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+
+public class ReadURL
+{
+    //读入一个完整的网页
+    public static void main(String[ ] args )
+    {
+        try
+        {
+            var url=new URL("http://172.26.50.21/login");//创建URL
+            var isr= new InputStreamReader(url.openStream());//创建Reader
+            var br=new BufferedReader(isr);//BufferedReader
+            String readstring;
+            while((readstring=br.readLine())!=null)
+            {
+                StdOut.println(readstring);
+            }
+            br.close();
+            isr.close();
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+}
+
+```
+
+#### 10.3.3 双向通信
+
+使用URLConnection类
+
+![image-20191117105946918]( image-20191117105946918.png)
+
+### 10.4 Socket
+
+#### 10.4.1 通信的一般步骤-TCP协议
+
+- 先在服务器端生成一个ServerSocket实例对象，并通过accept()方法随时监听客户端的连接请求。
+- 当客户端需要连接时，相应地要生成一个Socket实例对象，并发出连接请求，其中host参数指明该主机名，port参数指明该主机端口号。
+- 服务器端通过accept()方法接收到客户端的请求后，开辟一个接口与之进行连接，并生成所需的I/O数据流。
+- 客户端和服务器端的通信都是通过一对InputStream和OutputStream进行的。通信结束后，两端分别关闭对象的Socket接口。
