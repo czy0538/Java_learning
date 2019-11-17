@@ -1174,7 +1174,9 @@ g1.add(f);
 
 ```java
 //创建一个文本框，其初始内容由参数text指定，首选宽度由参数columns指定，如果参数columns被设置为0，则首选宽度将是组件实现的自然结果。
+//一定要设定宽度
 JTextField(String text, int columns);
+JPasswordFile(int columns);
 String s=getText();
 setText(" ");
 ```
