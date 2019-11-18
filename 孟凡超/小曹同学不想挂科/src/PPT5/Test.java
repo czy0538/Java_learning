@@ -3,6 +3,8 @@ package PPT5;
 import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.io.ObjectStreamException;
+
 public class Test
 {
     public static void main(String[] args)
@@ -16,6 +18,7 @@ public class Test
 
         a.printf(b);
         a.printf(c);
+
 
 ////        a.printf();
 ////        b.printf();
@@ -43,15 +46,20 @@ class A
     {
         StdOut.println("A");
     }
+
     void printf(A e)
     {
+        if (e instanceof Object&&e instanceof A)
+        {
+            StdOut.println("hehe");
+        }
         if (e instanceof B)
         {
-            StdOut.println(e.getClass()+"is b");
+            StdOut.println(e.getClass() + "is b");
         }
-        else if(e instanceof C)
+        else if (e instanceof C)
         {
-            StdOut.println(e.getClass()+"is c");
+            StdOut.println(e.getClass() + "is c");
         }
 
     }
