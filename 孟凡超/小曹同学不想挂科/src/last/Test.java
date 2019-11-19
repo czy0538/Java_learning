@@ -23,5 +23,14 @@ public class Test
         var b= Integer.valueOf("12").intValue();
 
 
+
+    }
+}
+
+class Abc
+{
+    public static void main (String [] args)
+    {
+        System.out.println(213);
     }
 }
